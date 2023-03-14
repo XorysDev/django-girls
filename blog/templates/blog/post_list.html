@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% extends 'blog/base.html' %}
 {% load static %}
 <html>
     <head>
@@ -18,15 +18,19 @@
             <h1><a href="/">Django Girls Blog</a></h1>
              </div>
 
+            {% block content %}
             {% for post in posts %}
                 <div class="post">
+                    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                    {% if post.published_date %}
                     <div class="date">
                         <p>Опубликовано: {{ post.published_date }}</p>
                     </div>
-                    <h1><a href="">{{ post.title }}</a></h1>
+                    {% endif %}
                     <p>{{ post.text|linebreaksbr }}</p>
                 </div>
             {% endfor %}
+            {% endblock %}
         </div>
     </div>
 </div>
